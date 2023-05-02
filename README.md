@@ -7,7 +7,9 @@
 ## Instructions
 
 - Install `pytz` to view the timezone shown in the port scanner output:
-  `pip install pytz`
+  ```bash
+  pip install pytz
+  ```
 - Options:
   - Order of options (`-mode`, `-order`, `-ports`) does not matter.
 
