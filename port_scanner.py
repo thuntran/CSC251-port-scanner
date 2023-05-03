@@ -253,7 +253,7 @@ def main():
     target_hostname = input("Enter host name: ")
     host_alive, latency = is_host_alive(target_hostname)
     if host_alive:
-        print(f"Host is up ({latency:.4f}s latency).")  # TODO: if possible, implement to show latency
+        print(f"Host is up ({latency:.4f}s latency).")
         port_scan(target_ip, mode, order, ports)
     else:
         print("Host is not alive or invalid. Please try again.")
