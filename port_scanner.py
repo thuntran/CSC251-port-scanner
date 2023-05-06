@@ -64,7 +64,7 @@ def normal_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.1)
+        s.settimeout(0.01)
         result = s.connect_ex((target_host, port))
 
         # If the connection attempt is successful
@@ -73,7 +73,7 @@ def normal_scan(target_host, ports):
 
             # Construct a TCP SYN packet and send it to the target host
             syn_packet = IP(dst=target_host) / TCP(dport=port, flags="S")
-            syn_packet_response = sr1(syn_packet, timeout=10, verbose=0)
+            syn_packet_response = sr1(syn_packet, timeout=1, verbose=0)
 
             # If there is no response, the port is assumed to be closed
             if not syn_packet_response:
@@ -88,7 +88,7 @@ def normal_scan(target_host, ports):
                     # to complete the 3-way handshake
                     send_rst = sr(
                         IP(dst=target_host) / TCP(dport=port, flags="AR"),
-                        timeout=10,
+                        timeout=1,
                         verbose=0,
                     )
                     # Get the name of the service running on the open port
@@ -106,6 +106,9 @@ def normal_scan(target_host, ports):
         # If the connection attempt is unsuccessful, the port is assumed to be closed
         else:
             closed_ports += 1
+
+        # # Print this debugging line to see how the scanning progresses after scanning every port
+        # print(result, port, open_ports, closed_ports)
 
         # Close the socket
         s.close()
@@ -133,7 +136,7 @@ def syn_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.1)
+        s.settimeout(0.01)
         result = s.connect_ex((target_host, port))
 
         # If the connection attempt is successful
@@ -142,7 +145,7 @@ def syn_scan(target_host, ports):
 
             # Construct a TCP SYN packet and send it to the target host
             syn_packet = IP(dst=target_host) / TCP(dport=port, flags="S")
-            syn_packet_response = sr1(syn_packet, timeout=10, verbose=0)
+            syn_packet_response = sr1(syn_packet, timeout=1, verbose=0)
 
             # If there is no response, the port is assumed to be closed
             if not syn_packet_response:
@@ -171,6 +174,9 @@ def syn_scan(target_host, ports):
         else:
             closed_ports += 1
 
+        # # Print this debugging line to see how the scanning progresses after scanning every port
+        # print(result, port, open_ports, closed_ports)
+
         # Close the socket
         s.close()
 
@@ -196,7 +202,7 @@ def fin_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.1)
+        s.settimeout(0.01)
         result = s.connect_ex((target_host, port))
 
         # If the connection attempt is successful
@@ -205,7 +211,7 @@ def fin_scan(target_host, ports):
 
             # Construct a TCP FIN packet and send it to the target host
             fin_packet = IP(dst=target_host) / TCP(dport=port, flags="F")
-            fin_packet_response = sr1(fin_packet, timeout=10, verbose=0)
+            fin_packet_response = sr1(fin_packet, timeout=1, verbose=0)
 
             # If there is no response, the port is assumed to be open
             if not fin_packet_response:
@@ -223,6 +229,9 @@ def fin_scan(target_host, ports):
         # If the connection attempt is unsuccessful, the port is assumed to be closed
         else:
             closed_ports += 1
+
+        # # Print this debugging line to see how the scanning progresses after scanning every port
+        # print(result, port, open_ports, closed_ports)
 
         # Close the socket
         s.close()
@@ -274,6 +283,7 @@ def port_scan(target_host, mode, order, ports):
         host_alive, latency = is_host_alive(target_host)
         if host_alive:
             print(f"Host is up ({latency:.4f}s latency).")
+            alive_host_count += 1
         else:
             print("Host is down. Please try again.")
             return  # Exit scan if host is down
