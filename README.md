@@ -55,10 +55,10 @@ The only file required to run the port scanner is `port_scanner.py`.
   Port 22 (ssh) is open
 
   Not shown: 1023 closed port(s)
-  PORT        STATE SERVICE
-  22/tcp      open  ssh
+  PORT    STATE SERVICE
+  22/tcp  open  ssh
 
-  Scan done: 1 IP address (1 host up) scanned in 16.57 seconds
+  Scan done: 1 IP address (1 host up) scanned in 19.42 seconds
   ```
 
   - Additionally, here is an example of what the output looks like when the IP address of the target host is invalid:
