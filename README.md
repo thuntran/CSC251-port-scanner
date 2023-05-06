@@ -62,8 +62,6 @@ The only file required to run the port scanner is `port_scanner.py`.
   Scan done: 1 IP address (1 host up) scanned in 16.57 seconds
   ```
 
-```
-
 ## Challenges & how to overcome
 
 - One major challenge that I faced in this project is that my unfamiliarity with using the `socket` module for socket programming and the `scapy` module for packet manipulation.
@@ -89,4 +87,7 @@ The only file required to run the port scanner is `port_scanner.py`.
 ## Contributors
 
 - [Thu Tran](https://github.com/thuntran) (I worked independently on this final project.)
+
+```
+
 ```
