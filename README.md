@@ -1,4 +1,6 @@
-# CSC 251 Final Project: Port Scanner
+# Port Scanner
+
+Written for CSC 251: Network Security final project.
 
 ## Necessary files
 
