@@ -51,6 +51,13 @@ The only file required to run the port scanner is `port_scanner.py`.
   Starting port scan at 2023-05-06 16:13:05 EDT
   Port scan report for glasgow.smith.edu (131.229.72.13)
   Host is up (0.0117s latency).
+  
+  Port 22 (ssh) is open
+  Not shown: 1023 closed port(s)
+  PORT        STATE SERVICE
+  22/tcp      open  ssh
+
+  Scan done: 1 IP address (1 host up) scanned in 16.57 seconds
   ```
 
   - Additionally, here is an example of what the output looks like when the IP address of the target host is invalid:
