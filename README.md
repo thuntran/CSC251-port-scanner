@@ -47,12 +47,13 @@ The only file required to run the port scanner is `port_scanner.py`.
   python3 port_scanner.py -mode syn -order order -ports known 131.229.72.13
   ```
 
-  ```bash
-  Starting port scan at 2023-05-06 16:13:05 EDT
+  ```
+  Starting port scan at 2023-05-06 16:27:20 EDT
   Port scan report for glasgow.smith.edu (131.229.72.13)
-  Host is up (0.0117s latency).
-  
+  Host is up (1.7713s latency).
+
   Port 22 (ssh) is open
+
   Not shown: 1023 closed port(s)
   PORT        STATE SERVICE
   22/tcp      open  ssh
@@ -66,7 +67,7 @@ The only file required to run the port scanner is `port_scanner.py`.
   python3 port_scanner.py -mode syn -order random -ports known 131.229.72.1300000000
   ```
 
-  ```bash
+  ```
   Starting port scan at 2023-05-06 16:29:33 EDT
   Failed to resolve "131.229.72.1300000000"
   WARNING: No targets were specified, so 0 hosts scanned
