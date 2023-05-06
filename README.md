@@ -41,7 +41,7 @@ The only file required to run the port scanner is `port_scanner.py`.
 - Expected results:
 
   - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take **~17-20 seconds**. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take **~17-20 minutes**. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
-  - Below is an example of how the output looks like when running the port scanner via the terminal:
+  - Here is an example of what the output looks like when running the port scanner via the terminal:
 
   ```bash
   python3 port_scanner.py -mode syn -order order -ports known 131.229.72.13
@@ -51,15 +51,19 @@ The only file required to run the port scanner is `port_scanner.py`.
   Starting port scan at 2023-05-06 16:13:05 EDT
   Port scan report for glasgow.smith.edu (131.229.72.13)
   Host is up (0.0117s latency).
+  ```
 
+  - Additionally, here is an example of what the output looks like when the IP address of the target host is invalid:
 
-  Port 22 (ssh) is open
+  ```bash
+  python3 port_scanner.py -mode syn -order random -ports known 131.229.72.1300000000
+  ```
 
-  Not shown: 1023 closed port(s)
-  PORT        STATE SERVICE
-  22/tcp      open  ssh
-
-  Scan done: 1 IP address (1 host up) scanned in 16.57 seconds
+  ```bash
+  Starting port scan at 2023-05-06 16:29:33 EDT
+  Failed to resolve "131.229.72.1300000000"
+  WARNING: No targets were specified, so 0 hosts scanned
+  Scan done: 0 IP addresses (0 hosts up) scanned in 0.07 seconds
   ```
 
 ## Challenges & how to overcome
