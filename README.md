@@ -20,9 +20,9 @@ The only file required to run the port scanner is `port_scanner.py`.
   python3 port_scanner.py -mode [normal/syn/fin] -order [order/random] -ports [all/known] [ip_address]
   ```
 
-  - The target IP address to be tested on is 131.229.72.13.
-  - The target hostname to be tested on is `glasgow.smith.edu`.
-  - IMPORTANT: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)
+  - The target IP address to be tested on is **131.229.72.13**.
+  - The target hostname to be tested on is **glasgow.smith.edu**.
+  - _IMPORTANT_: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)
 
 - Options:
   - Order of options (`-mode`, `-order`, `-ports`) does not matter.

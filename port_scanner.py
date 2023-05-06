@@ -4,7 +4,8 @@ import time
 import datetime
 import pytz
 import random
-from scapy.all import sr, sr1, send, IP, TCP, ICMP
+from scapy.all import *
+from scapy.all import IP, TCP, ICMP
 
 
 def is_host_alive(target_host):
@@ -89,8 +90,6 @@ def normal_scan(target_host, ports):
 
                 elif syn_packet_response.getlayer(TCP).flags == 0x14:
                     # If the TCP RST/ACK flag is set, the port is closed
-                    closed_ports += 1
-
                     closed_ports += 1
         # If the connection attempt was unsuccessful, the port is assumed to be closed
         else:
@@ -228,7 +227,7 @@ def port_scan(target_host, mode, order, ports):
 
     alive_host_count = 0
 
-    current_time = datetime.datetime.now(pytz.timezone("US/Eastern"))
+    current_time = datetime.now(pytz.timezone("US/Eastern"))
     print(
         "Starting port scan at \033[1m"
         + str(current_time.strftime("%Y-%m-%d %H:%M:%S %Z"))
