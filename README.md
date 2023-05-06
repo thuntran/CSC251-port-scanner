@@ -36,11 +36,11 @@ The only file required to run the port scanner is `port_scanner.py`.
   - The target hostname to be tested on is **glasgow.smith.edu**.
   - Order of options (`-mode`, `-order`, `-ports`) does not matter.
   - Sometimes when I did too many rounds of testing at once, it might cause the host to be down. I would suggest waiting a bit and running the program again.
-  - _IMPORTANT_: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)
+  - **IMPORTANT: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)**
 
 - Expected results:
 
-  - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take **~17-20 seconds**. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take **~17-20 minutes**. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
+  - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take _approximately 17-20 seconds_. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take _approximately 17-20 minutes_. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
   - Here is an example of what the output looks like when running the port scanner via the terminal:
 
   ```bash
@@ -77,10 +77,10 @@ The only file required to run the port scanner is `port_scanner.py`.
 ## Challenges & how to overcome
 
 - One major challenge that I faced in this project is that my unfamiliarity with using the `socket` module for socket programming and the `scapy` module for packet manipulation.
-- However, there is quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think I was able to utilize well to complete this final project.
-- Also, reviewing my previous coding assignments that involved using `socket` and `scapy` did help too.
+  - However, there is quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think I was able to utilize well to complete this final project.
+  - Also, reviewing my previous coding assignments that involved using `socket` and `scapy` helped too.
 - I used the `argparse` module but didn't have a whole lot of experience with it, and it took me a bit at the beginning of the project to grasp what I need to do to construct the correct arguments for the command line.
-- Reading the Python documentation on `argparse` helped me a lot in recalling how `argparse` works.
+  - Reading the Python documentation on `argparse` helped me a lot in recalling how `argparse` works.
 
 ## Resources
 
