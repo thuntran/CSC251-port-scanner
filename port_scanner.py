@@ -86,7 +86,7 @@ def normal_scan(target_host, ports):
                 if syn_packet_response.getlayer(TCP).flags == 0x12:
                     # Construct a TCP ACK/RST packet and send it to the target host
                     # to complete the 3-way handshake
-                    send_rst = sr(
+                    ack_rst_packet = sr(
                         IP(dst=target_host) / TCP(dport=port, flags="AR"),
                         timeout=1,
                         verbose=0,
@@ -162,13 +162,12 @@ def syn_scan(target_host, ports):
                     open_ports.append((port, service))
                     print(f"Port {port} ({service}) is open")
 
-                    # Construct a TCP RST packet and send it to the client
-                    client_ip = syn_packet_response[IP].src
-                    client_port = syn_packet_response[TCP].sport
-                    rst_packet = IP(dst=client_ip) / TCP(
-                        dport=client_port, sport=port, flags="R"
+                    # Construct a TCP RST packet and send it to the target host
+                    rst_packet = sr(
+                        IP(dst=target_host) / TCP(dport=port, flags="R"),
+                        timeout=1,
+                        verbose=0,
                     )
-                    send(rst_packet, verbose=0)
 
         # If the connection attempt is unsuccessful, the port is assumed to be closed
         else:
