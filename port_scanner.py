@@ -262,20 +262,13 @@ def port_scan(target_host, mode, order, ports):
     alive_host_count = 0
 
     current_time = datetime.now(pytz.timezone("US/Eastern"))
-    print(
-        "Starting port scan at \033[1m"
-        + str(current_time.strftime("%Y-%m-%d %H:%M:%S %Z"))
-        + "\033[0m"
-    )
+    current_time = str(current_time.strftime("%Y-%m-%d %H:%M:%S %Z"))
+    print(f"Starting port scan at \033[1m{current_time}\033[0m")
 
     try:
         target_hostname = socket.gethostbyaddr(target_host)[0]
         print(
-            "Port scan report for \033[1m"
-            + target_hostname
-            + " ("
-            + target_host
-            + ")\033[0m"
+            f"Port scan report for \033[1m{target_hostname} ({target_host})\033[0m"
         )
 
         # Check if the target host is alive
@@ -350,11 +343,7 @@ def port_scan(target_host, mode, order, ports):
         ### END OF SCAN
 
         # Show the number of closed ports
-        print(
-            "\033[4m\033[1mNot shown:\033[0m "
-            + str(closed_ports)
-            + " closed port(s)"
-        )
+        print(f"\033[4m\033[1mNot shown:\033[0m {closed_ports} closed port(s)")
 
         # Show the open port(s)/state(s)/service(s)
         print("\033[1mPORT    STATE SERVICE\033[0m")
