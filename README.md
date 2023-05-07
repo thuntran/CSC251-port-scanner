@@ -42,7 +42,7 @@ The only file required to run the port scanner is `port_scanner.py`.
 
 - Expected results:
 
-  - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take _approximately 17-20 seconds_. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take _approximately 17-20 minutes_. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
+  - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take _approximately 20 seconds_. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take _approximately 20 minutes_. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
   - Here is an example of what the output looks like when running the port scanner via the terminal:
 
   ```bash
