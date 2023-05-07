@@ -4,7 +4,7 @@ Written for CSC 251: Network Security final project.
 
 ## Necessary files
 
-The only file required to run the port scanner is `port_scanner.py`.
+The only file required to run this port scanner is `port_scanner.py`.
 
 ## Instructions
 
@@ -16,13 +16,13 @@ The only file required to run the port scanner is `port_scanner.py`.
   pip install scapy
   ```
 
-- Install `pytz` to view the timezone shown in the port scanner output:
+- Install the `pytz` module to view the timezone shown in the port scanner output:
 
   ```bash
   pip install pytz
   ```
 
-- The other modules used in this program are pre-installed in Python and thus do not need to be installed using `pip`.
+- Other than that, the remaining modules used in this program are pre-installed in Python and thus do not need to be installed using `pip`.
 
 ### Running the port scanner
 
@@ -34,16 +34,16 @@ The only file required to run the port scanner is `port_scanner.py`.
 
 - Notes about testing the port scanner:
 
-  - The target IP address to be tested on is **131.229.72.13**.
-  - The target hostname to be tested on is **glasgow.smith.edu**.
+  - The IP address of the target host to be tested on is **131.229.72.13**.
+  - The target hostname is **glasgow.smith.edu**.
   - Order of options (`-mode`, `-order`, `-ports`) does not matter.
-  - Sometimes when I did too many rounds of testing at once, it might cause the host to be down. I would suggest waiting a bit and running the program again.
+  - Doing multiple rounds of testing at once might cause the host to be down. I would suggest waiting a bit and running the port scanner again.
   - **IMPORTANT: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)**
 
 - Expected results:
 
   - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take _approximately 20 seconds_. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take _approximately 20 minutes_. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
-  - Here is an example of what the output looks like when running the port scanner via the terminal:
+  - Here is an example of what the output looks like when running the port scanner in the terminal:
 
   ```bash
   python3 port_scanner.py -mode syn -order order -ports known 131.229.72.13
@@ -78,10 +78,10 @@ The only file required to run the port scanner is `port_scanner.py`.
 
 ## Challenges & how to overcome
 
-- One major challenge that I faced in this project is that my unfamiliarity with using the `socket` module for socket programming and the `scapy` module for packet manipulation.
-  - However, there is quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think I was able to utilize well to complete this final project.
-  - Also, reviewing my previous coding assignments that involved using `socket` and `scapy` helped too.
-- I used the `argparse` module but didn't have a whole lot of experience with it, and it took me a bit at the beginning of the project to grasp what I need to do to construct the correct arguments for the command line.
+- One major challenge that I faced in this project is my unfamiliarity with using the `socket` module for socket programming and the `scapy` module for packet manipulation in general.
+  - However, there are quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think was very helpful for me to understand more thoroughly the differences between TCP full connect scan, SYN scan and FIN scan, as well as how to implement them accordingly in order to complete this final project.
+  - Reviewing my previous coding assignments that involved using the `socket` and `scapy` modules helped too.
+- I used the `argparse` module before but didn't have a whole lot of experience with it, so it took me a while at the beginning of the project to figure out what I need to do to construct the correct arguments for the command line.
   - Reading the Python documentation on `argparse` helped me a lot in recalling how `argparse` works.
 
 ## Resources
@@ -100,4 +100,5 @@ The only file required to run the port scanner is `port_scanner.py`.
 
 ## Contributors
 
-- [Thu Tran](https://github.com/thuntran) (I worked independently on this final project.)
+- [Thu Tran](https://github.com/thuntran) 
+  - I worked independently in this final project.
