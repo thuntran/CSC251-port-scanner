@@ -100,5 +100,4 @@ The only file required to run this port scanner is `port_scanner.py`.
 
 ## Contributors
 
-- [Thu Tran](https://github.com/thuntran) 
-  - I worked independently in this final project.
+- [Thu Tran](https://github.com/thuntran) (I worked independently in this final project.)
