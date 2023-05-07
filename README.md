@@ -1,7 +1,5 @@
 # Port Scanner
 
-Written for CSC 251: Network Security final project.
-
 ## Necessary files
 
 The only file required to run this port scanner is `port_scanner.py`.
