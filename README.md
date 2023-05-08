@@ -27,14 +27,14 @@ The only file required to run this port scanner is `port_scanner.py`.
 - To run the port scanner, from the terminal (MacOS/Linux) or command prompt (Windows):
 
   ```bash
-  python3 port_scanner.py -mode [normal/syn/fin] -order [order/random] -ports [all/known] [ip_address]
+  python3 port_scanner.py -mode [normal/syn/fin] -order [order/random] -ports [all/known] -target_ip [ip_address]
   ```
 
 - Notes about testing the port scanner:
 
   - The IP address of the target host to be tested on is **131.229.72.13**.
   - The target hostname is **glasgow.smith.edu**.
-  - Order of options (`-mode`, `-order`, `-ports`) does not matter.
+  - Order of the arguments does not matter. However, it is important to include the corresponding flags (`-mode`, `-order`, `-ports`, `-target_ip`) in front of the arguments, like what is demonstrated in the command line above.
   - Doing multiple rounds of testing at once might cause the host to be down. I would suggest waiting a bit and running the port scanner again.
   - **IMPORTANT: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)**
 

@@ -398,7 +398,7 @@ def main():
         default="all",
         help="Ports to scan (default range of ports is all)",
     )
-    parser.add_argument("target_ip", help="Target IP address")
+    parser.add_argument("-target_ip", help="Target IP address")
     args = parser.parse_args()
 
     # Extract the arguments from argparse
