@@ -77,7 +77,7 @@ The only file required to run this port scanner is `port_scanner.py`.
 ## Challenges & how to overcome
 
 - One major challenge that I faced in this project is my unfamiliarity with using the `socket` module for socket programming and the `scapy` module for packet manipulation in general.
-  - However, there are quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think was very helpful for me to understand more thoroughly the differences between TCP full connect scan, SYN scan and FIN scan, as well as how to implement them accordingly in order to complete this final project.
+  - However, there are quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think was very helpful for me to understand more thoroughly the differences between full TCP connect scan, SYN scan and FIN scan, as well as how to implement them accordingly in order to complete this final project.
   - Reviewing my previous coding assignments that involved using the `socket` and `scapy` modules helped too.
 - I used the `argparse` module before but didn't have a whole lot of experience with it, so it took me a while at the beginning of the project to figure out what I need to do to construct the correct arguments for the command line.
   - Reading the Python documentation on `argparse` helped me a lot in recalling how `argparse` works.
