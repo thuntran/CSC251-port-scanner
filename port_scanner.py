@@ -256,7 +256,7 @@ def fin_scan(target_host, ports):
 
         # If there is no response, the port is open or filtered
         if not fin_packet_response:
-            # Get the name of the service running on the filtered port
+            # Get the name of the service running on the open|filtered port
             try:
                 service = socket.getservbyport(port)
             except OSError:
