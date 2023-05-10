@@ -35,12 +35,11 @@ The only file required to run this port scanner is `port_scanner.py`.
   - The IP address of the target host to be tested on is **131.229.72.13**.
   - The target hostname is **glasgow.smith.edu**.
   - Order of the arguments does not matter. However, it is important to include the corresponding flags (`-mode`, `-order`, `-ports`, `-target_ip`) in front of the arguments, like what is demonstrated in the command line above.
-  - Doing multiple rounds of testing at once might cause the host to be down. I would suggest waiting a bit and running the port scanner again.
+  - Doing multiple rounds of testing at once might cause the host to be down (`WARNING: Mac address to reach destination not found. Using broadcast.`). I would suggest waiting a bit and running the port scanner again.
   - **IMPORTANT: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)**
 
 - Expected results:
 
-  - When the scanner probes only well-known ports (i.e. ports 0 to 1023), the scan is expected to take _approximately 20 seconds_. When the scanner probes all ports (i.e. ports 0 to 65525), the scan is expected to take _approximately 20 minutes_. The estimations assume that there is no interruption during the port scanner run. If there is any huge deviation from these estimations, I would suggest running the port scanner again.
   - Here is an example of what the output looks like when running the port scanner in the terminal:
 
   ```bash
@@ -48,17 +47,23 @@ The only file required to run this port scanner is `port_scanner.py`.
   ```
 
   ```
-  Starting port scan at 2023-05-06 16:27:20 EDT
+  Starting port scan at 2023-05-10 02:40:43 EDT
   Port scan report for glasgow.smith.edu (131.229.72.13)
-  Host is up (1.7713s latency).
+  Host is up (0.0131s latency).
 
+  Port 21 (ftp) is open
   Port 22 (ssh) is open
+  Port 80 (http) is open
+  Port 443 (https) is open
 
-  Not shown: 1023 closed port(s)
-  PORT    STATE SERVICE
-  22/tcp  open  ssh
+  Not shown: 1020 closed port(s)
+  PORT      STATE SERVICE
+  21/tcp    open  ftp
+  22/tcp    open  ssh
+  80/tcp    open  http
+  443/tcp   open  https
 
-  Scan done: 1 IP address (1 host up) scanned in 19.42 seconds
+  Scan done: 1 IP address (1 host up) scanned in 20.10 seconds
   ```
 
   - Additionally, here is an example of what the output looks like when the IP address of the target host is invalid:
@@ -76,7 +81,7 @@ The only file required to run this port scanner is `port_scanner.py`.
 
 ## Challenges & how to overcome
 
-- One major challenge that I faced in this project is that I am not too familiar with using the `socket` module for socket programming and the `scapy` module for packet manipulation in general. 
+- One major challenge that I faced in this project is that I am not too familiar with using the `socket` module for socket programming and the `scapy` module for packet manipulation in general.
   - However, there are quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think was very helpful for me to understand more thoroughly the differences between full TCP connect scan, SYN scan and FIN scan, as well as how to implement them accordingly in order to complete this final project.
   - Reviewing my previous coding assignments that involved using the `socket` and `scapy` modules helped too.
 - I used the `argparse` module before but didn't have a whole lot of experience with it, so it took me a while at the beginning of the project to figure out what I need to do to construct the correct arguments for the command line.
@@ -93,6 +98,10 @@ The only file required to run this port scanner is `port_scanner.py`.
 - [SYN Stealth Scan with Power of Python Scapy](https://dev.to/powerexploit/syn-stealth-scan-with-power-of-python-scapy-58aj)
 - [Python Penetration Testing - Port Scanning](https://www.oreilly.com/library/view/python-penetration-testing/9781789138962/9f389f41-4489-4628-a61f-969eea3aae8c.xhtml)
 - [Port Scanning using Scapy](https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/)
+- [TCP Connect Scan (-sT)](https://nmap.org/book/scan-methods-connect-scan.html)
+- [TCP SYN (Stealth) Scan (-sS)](https://nmap.org/book/synscan.html#:~:text=SYN%20scan%20is%20the%20default,not%20hampered%20by%20intrusive%20firewalls.)
+- [TCP FIN, NULL, and Xmas Scans (-sF, -sN, -sX)](https://nmap.org/book/scan-methods-null-fin-xmas-scan.html)
+- [How to Set Timeout on Python's socket recv Method?](https://stackoverflow.com/questions/2719017/how-to-set-timeout-on-pythons-socket-recv-method)
 - [Add Colour to Text in Python](https://ozzmaker.com/add-colour-to-text-in-python/)
 
 ## Contributors
