@@ -29,10 +29,10 @@ def is_host_alive(target_host):
     # Reference: https://dev.to/powerexploit/let-s-ping-the-network-with-python-scapy-5g18
 
     # Construct an ICMP packet and send it to the target host
-    icmp_packet = IP(dst=target_host) / ICMP()
+    icmp_packet_response = sr1(
+        IP(dst=target_host) / ICMP(), timeout=10, verbose=0
+    )
 
-    # Wait for the target host's response
-    icmp_packet_response = sr1(icmp_packet, timeout=10, verbose=0)
     # If there is a response, host is alive
     if icmp_packet_response:
         is_alive = True
@@ -59,8 +59,6 @@ def normal_scan(target_host, ports):
         containing the open ports and their corresponding services.
 
     """
-    # Reference: https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/
-
     closed_ports, open_ports = 0, []
     src_port = RandShort()
     print()
@@ -68,39 +66,42 @@ def normal_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.1)
+        s.settimeout(0.01)
 
-        # Try to connect to the port with the specified timeout
+        # Try establishing a connection to the target host at the specified IP address and port number
         try:
             s.connect((target_host, port))
+        # If the connection is unsuccessful, the port is assumed to be closed
         except:
             closed_ports += 1
             s.close()
             continue
 
-        # Construct a TCP SYN packet and send it to the target host
-        syn_packet = IP(dst=target_host) / TCP(
-            sport=src_port, dport=port, flags="S"
-        )
-        syn_packet_response = sr1(syn_packet, timeout=1, verbose=0)
+        # Reference: https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/
 
-        # If there is no response, the port is assumed to be closed
+        # Construct a TCP SYN packet and send it to the target host
+        syn_packet_response = sr1(
+            IP(dst=target_host) / TCP(sport=src_port, dport=port, flags="S"),
+            timeout=1,
+            verbose=0,
+        )
+
+        # If there is no response, the port is closed
         if not syn_packet_response:
             closed_ports += 1
 
-        # If there is a response, check the TCP flags to determine
-        # whether the port is open or closed
+        # If there is a response, check the TCP flags to determine whether the port is open or closed
         elif syn_packet_response.haslayer(TCP):
-            # If the TCP SYN/ACK flag is set
+            # If the TCP SYN/ACK flag is set, the port is open
             if syn_packet_response.getlayer(TCP).flags == 0x12:  # "SA"
-                # Construct a TCP ACK/RST packet and send it to the target host
-                # to complete the 3-way handshake
+                # Construct a TCP ACK/RST packet and send it to the target host to complete the 3-way handshake
                 ack_rst_packet = sr(
                     IP(dst=target_host)
                     / TCP(sport=src_port, dport=port, flags="AR"),
                     timeout=1,
                     verbose=0,
                 )
+
                 # Get the name of the service running on the open port
                 try:
                     service = socket.getservbyport(port)
@@ -144,7 +145,6 @@ def syn_scan(target_host, ports):
         containing the open ports and their corresponding services.
 
     """
-    # Reference: https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/
 
     closed_ports, open_ports = 0, []
     src_port = RandShort()
@@ -155,21 +155,25 @@ def syn_scan(target_host, ports):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(0.01)
 
-        # Try to connect to the port with the specified timeout
+        # Try establishing a connection to the target host at the specified IP address and port number
         try:
             s.connect((target_host, port))
+        # If the connection is unsuccessful, the port is assumed to be closed
         except:
             closed_ports += 1
             s.close()
             continue
 
-        # Construct a TCP SYN packet and send it to the target host
-        syn_packet = IP(dst=target_host) / TCP(
-            sport=src_port, dport=port, flags="S"
-        )
-        syn_packet_response = sr1(syn_packet, timeout=1, verbose=0)
+        # Reference: https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/
 
-        # If there is no response, the port is assumed to be closed
+        # Construct a TCP SYN packet and send it to the target host
+        syn_packet_response = sr1(
+            IP(dst=target_host) / TCP(sport=src_port, dport=port, flags="S"),
+            timeout=1,
+            verbose=0,
+        )
+
+        # If there is no response, the port is filtered
         if not syn_packet_response:
             # Get the name of the service running on the filtered port
             try:
@@ -179,8 +183,7 @@ def syn_scan(target_host, ports):
             print(f"Port {port} ({service}) is filtered")
             continue
 
-        # If a response was received, check the TCP SYN/ACK flag to determine
-        # whether the port is open or closed
+        # If a response was received, check the TCP SYN/ACK flag to determine whether the port is open or closed
         elif syn_packet_response.haslayer(TCP):
             # If the TCP SYN/ACK flag is set
             if syn_packet_response.getlayer(TCP).flags == 0x12:  # "SA"
@@ -201,6 +204,7 @@ def syn_scan(target_host, ports):
                 open_ports.append((port, service))
                 print(f"Port {port} ({service}) is open")
 
+            # If the TCP ACK/RST flag is set, the port is closed
             elif syn_packet_response.getlayer(TCP).flags == 0x14:  # "AR"
                 closed_ports += 1
 
@@ -224,27 +228,33 @@ def fin_scan(target_host, ports):
         containing the open ports and their corresponding services.
 
     """
-    # Reference: https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/
     closed_ports, open_ports = 0, []
     print()
+
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(0.01)
 
-        # Try to connect to the port with the specified timeout
+        # Try establishing a connection to the target host at the specified IP address and port number
         try:
             s.connect((target_host, port))
+        # If the connection is unsuccessful, the port is assumed to be closed
         except:
             closed_ports += 1
             s.close()
             continue
 
-        # Construct a TCP FIN packet and send it to the target host
-        fin_packet = IP(dst=target_host) / TCP(dport=port, flags="F")
-        fin_packet_response = sr1(fin_packet, timeout=0.1, verbose=0)
+        # Reference: https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/
 
-        # If there is no response, the port is assumed to be open
+        # Construct a TCP FIN packet and send it to the target host
+        fin_packet_response = sr1(
+            IP(dst=target_host) / TCP(dport=port, flags="F"),
+            timeout=0.1,
+            verbose=0,
+        )
+
+        # If there is no response, the port is open or filtered
         if not fin_packet_response:
             # Get the name of the service running on the filtered port
             try:
@@ -253,8 +263,7 @@ def fin_scan(target_host, ports):
                 service = "unknown"
             # Add the open port to the list of open ports
             open_ports.append((port, service))
-            print(f"Port {port} ({service}) is open")
-            continue
+            print(f"Port {port} ({service}) is open|filtered")
 
         # If there is a response with the TCP ACK/RST flag set, the port is closed
         elif fin_packet_response.haslayer(TCP):
@@ -286,8 +295,7 @@ def port_scan(target_host, mode, order, ports):
     start_time = time.time()
 
     # Initialize a variable to keep track of the number of alive hosts
-    # Since this program is meant to scan only 1 target host, alive_host_count
-    # is either 0 or 1
+    # Since this program is meant to scan only 1 target host, alive_host_count is either 0 or 1
     alive_host_count = 0
 
     current_time = datetime.now(pytz.timezone("US/Eastern"))

@@ -20,7 +20,7 @@ The only file required to run this port scanner is `port_scanner.py`.
   pip install pytz
   ```
 
-- Other than that, the remaining modules used in this program are pre-installed in Python and thus do not need to be installed using `pip`.
+- Other than that, the remaining modules used in this program are pre-installed in Python, and do not need to be installed using `pip`.
 
 ### Running the port scanner
 
@@ -35,21 +35,21 @@ The only file required to run this port scanner is `port_scanner.py`.
   - The IP address of the target host to be tested on is **131.229.72.13**.
   - The target hostname is **glasgow.smith.edu**.
   - Order of the arguments does not matter. However, it is important to include the corresponding flags (`-mode`, `-order`, `-ports`, `-target_ip`) in front of the arguments, like what is demonstrated in the command line above.
-  - Doing multiple rounds of testing at once might cause the host to be down (`WARNING: Mac address to reach destination not found. Using broadcast.`). I would suggest waiting a bit and running the port scanner again.
+  - Doing multiple rounds of testing at once might cause the host to be down (`WARNING: Mac address to reach destination not found. Using broadcast.`). A suggestion is to wait a bit and then run the port scanner again.
   - **IMPORTANT: This port scanner is only intended to scan the host specified above. It is important that the port scanner should not be misused (i.e. to scan other hosts without permission.)**
 
 - Expected results:
 
-  - Here is an example of what the output looks like when running the port scanner in the terminal:
+  - Here is an example of what the output looks like when running the port scanner on a valid host:
 
   ```bash
   python3 port_scanner.py -mode syn -order order -ports known 131.229.72.13
   ```
 
   ```
-  Starting port scan at 2023-05-10 02:40:43 EDT
+  Starting port scan at 2023-05-10 09:50:42 EDT
   Port scan report for glasgow.smith.edu (131.229.72.13)
-  Host is up (0.0131s latency).
+  Host is up (0.0160s latency).
 
   Port 21 (ftp) is open
   Port 22 (ssh) is open
@@ -62,28 +62,28 @@ The only file required to run this port scanner is `port_scanner.py`.
   22/tcp    open  ssh
   80/tcp    open  http
   443/tcp   open  https
-
-  Scan done: 1 IP address (1 host up) scanned in 20.10 seconds
   ```
 
-  - Additionally, here is an example of what the output looks like when the IP address of the target host is invalid:
+  - Additionally, here is an example of what the output looks like when running the port scanner on an invalid host:
 
   ```bash
-  python3 port_scanner.py -mode syn -order random -ports known 131.229.72.1300000000
+  python3 port_scanner.py -mode syn -order random -ports known 131.229.72.1300000
   ```
 
   ```
-  Starting port scan at 2023-05-06 16:29:33 EDT
-  Failed to resolve "131.229.72.1300000000"
+  Starting port scan at 2023-05-10 09:59:33 EDT
+  Failed to resolve "131.229.72.1300000"
   WARNING: No targets were specified, so 0 hosts scanned
-  Scan done: 0 IP addresses (0 hosts up) scanned in 0.07 seconds
+  Scan done: 0 IP addresses (0 hosts up) scanned in 0.08 second
   ```
 
 ## Challenges & how to overcome
 
 - One major challenge that I faced in this project is that I am not too familiar with using the `socket` module for socket programming and the `scapy` module for packet manipulation in general.
-  - However, there are quite a number of online resources (especially those with diagrams to illustrate the differences between the 3 scanning modes), which I think was very helpful for me to understand more thoroughly the differences between full TCP connect scan, SYN scan and FIN scan, as well as how to implement them accordingly in order to complete this final project.
+  - However, there are quite a number of helpful online resources, especially those with diagrams to illustrate the differences between the 3 scanning modes, that I referred to in order to understand more thoroughly the differences between full TCP connect scan, SYN scan and FIN scan, as well as how to implement them accordingly.
   - Reviewing my previous coding assignments that involved using the `socket` and `scapy` modules helped too.
+- Another major challenge that I encountered is to handle exceptions at different points in the program. This includes exceptions raised when a connection establishment is unsuccessful, or when `socket.getservbyport()` does not have any associated data for certain ports, or when no banner is sent by the server using the full TCP connect scan mode.
+  - To overcome this, I took note of the exceptions thrown by my program if there was any, and tried applying several `try - except` blocks appropriately to handle the exceptions. I didn't notice the importance of all the `try - except` blocks in my program until I completed it.
 - I used the `argparse` module before but didn't have a whole lot of experience with it, so it took me a while at the beginning of the project to figure out what I need to do to construct the correct arguments for the command line.
   - Reading the Python documentation on `argparse` helped me a lot in recalling how `argparse` works.
 
