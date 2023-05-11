@@ -66,7 +66,7 @@ def normal_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.01)
+        s.settimeout(0.1)
 
         # Try establishing a connection to the target host at the specified IP address and port number
         try:
@@ -153,7 +153,7 @@ def syn_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.01)
+        s.settimeout(0.1)
 
         # Try establishing a connection to the target host at the specified IP address and port number
         try:
@@ -234,7 +234,7 @@ def fin_scan(target_host, ports):
     for port in ports:
         # Create a TCP socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.01)
+        s.settimeout(0.1)
 
         # Try establishing a connection to the target host at the specified IP address and port number
         try:
