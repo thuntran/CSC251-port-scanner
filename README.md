@@ -77,16 +77,6 @@ The only file required to run this port scanner is `port_scanner.py`.
   Scan done: 0 IP addresses (0 hosts up) scanned in 0.08 second
   ```
 
-## Challenges & how to overcome
-
-- One major challenge that I faced in this project is that I am not too familiar with using the `socket` module for socket programming and the `scapy` module for packet manipulation in general.
-  - However, there are quite a number of helpful online resources, especially those with diagrams to illustrate the differences between the 3 scanning modes, that I referred to in order to understand more thoroughly the differences between full TCP connect scan, SYN scan and FIN scan, as well as how to implement them accordingly.
-  - Reviewing my previous coding assignments that involved using the `socket` and `scapy` modules helped too.
-- Another major challenge that I encountered is to handle exceptions at different points in the program. This includes exceptions raised when a connection establishment is unsuccessful, or when `socket.getservbyport()` does not have any associated data for certain ports, or when no banner is sent by the server using the full TCP connect scan mode.
-  - To overcome this, I took note of the exceptions thrown by my program if there was any, and tried applying several `try - except` blocks appropriately to handle the exceptions. I didn't notice the importance of all the `try - except` blocks in my program until I completed it.
-- I used the `argparse` module before but didn't have a whole lot of experience with it, so it took me a while at the beginning of the project to figure out what I need to do to construct the correct arguments for the command line.
-  - Reading the Python documentation on `argparse` helped me a lot in recalling how `argparse` works.
-
 ## Resources
 
 - [argparse - Parser for command-line options, arguments and sub-commands - Python documentation](https://docs.python.org/3/library/argparse.html)
