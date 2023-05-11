@@ -3,7 +3,8 @@
 - One major challenge that I faced in this project is that I am not too familiar with using the `socket` module for socket programming 
 and the `scapy` module for packet manipulation in general.
   - However, there are quite a number of helpful online resources, especially those with diagrams to illustrate the differences between 
-  the 3 scanning modes, that I referred to in order to understand more thoroughly the differences between full TCP connect scan, SYN scan and FIN scan, as well as how to implement them accordingly.
+  the 3 scanning modes, that I referred to in order to understand more thoroughly the differences between full TCP connect scan, SYN scan 
+  and FIN scan, as well as how to implement them accordingly.
   - Reviewing my previous coding assignments that involved using the `socket` and `scapy` modules helped too.
 
 - Another major challenge that I encountered is to handle exceptions at different points in the program. This includes exceptions raised 
